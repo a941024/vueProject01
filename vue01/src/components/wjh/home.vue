@@ -5,6 +5,7 @@
       <li>2楼: 一楼说的对!</li>
       <li>3楼: 三楼表示赞同</li>
     </ul>
+    <img src="../../assets/wjh/wjh_girl.jpg" height="400" width="600"/>
   </div>
 
 </template>
@@ -22,7 +23,13 @@
   background: blueviolet;
   list-style: none;
 }
-  li{
+  ul{
     font-size: 20px;
+    padding-top: 5px;
+    padding-left:50px;
+  }
+  img{
+    margin-top: 5px;
+    margin-left:50px;
   }
 </style>

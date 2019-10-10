@@ -18,5 +18,7 @@
   width: 100%;
   height:20%;
   background: aqua;
+  font-size: 40px;
+  text-align: center;
 }
 </style>
