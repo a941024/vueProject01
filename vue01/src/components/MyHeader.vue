@@ -2,7 +2,7 @@
   <div id="header">
     <router-link :to="{path:'/home'}">主页</router-link>
     <router-link :to="{path: '/pageOne'}">页面一</router-link>
-    <router-link :to="{}">页面二</router-link>
+    <router-link :to="{path:'/yim'}">页面二</router-link>
   </div>
 
 </template>
