@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import '../src/peishi/PeiShi_w'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
