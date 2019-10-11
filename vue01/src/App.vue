@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
+    <MyFoot></MyFoot>
   </div>
 </template>
 
 <script>
 
+import MyFoot from "./components/MyFoot";
 export default {
   name: 'App',
-  components: {}
+  components: {MyFoot}
 }
 </script>
 
@@ -24,5 +26,6 @@ export default {
     width: 100%;
     height: 100%;
     font-size: 20px;
+    background-color: #f2f2f2;
   }
 </style>
