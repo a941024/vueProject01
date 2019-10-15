@@ -5,7 +5,7 @@
       <van-icon name="search" slot="left" />
     </van-nav-bar>
     <!--轮播区域-->
-    <van-swipe  indicator-color="#1989fa	">
+    <van-swipe  indicator-color="#1989fa" >
       <van-swipe-item >
         <van-grid :column-num="4" >
           <van-grid-item
@@ -13,6 +13,7 @@
             :key="value"
             :icon="'//fuss10.elemecdn.com'+item.image_url"
             :text="item.title"
+            :to="{path:'/storeClassify',query: {title:item.title}}"
           />
         </van-grid>
       </van-swipe-item>
@@ -23,6 +24,7 @@
             :key="value"
             :icon="'//fuss10.elemecdn.com'+item.image_url"
             :text="item.title"
+            :to="{path:'/storeClassify',query: {title:item.title}}"
           />
         </van-grid>
       </van-swipe-item>
@@ -66,7 +68,7 @@
           <p>
             <van-tag plain>{{v.supports[0].icon_name}}</van-tag>
           <van-tag plain>{{v.supports[1].icon_name}}</van-tag>
-          <van-tag plain v-text="v.supports[2] ? v.supports[2].icon_name : ''" v-if="v.supports[2] ? true : false"></van-tag>
+          <van-tag plain :color="v.supports[2] ? 'gray' : 'transparent'">{{v.supports[2] ? v.supports[2].icon_name : ''}}</van-tag>
         </p>
           <p class="shop1">
             <van-tag type="primary">{{v.delivery_mode.text}}</van-tag>
@@ -119,7 +121,7 @@
           console.log(res);
           this.shop = res.data;
 
-          // console.log(this.shop);
+          console.log(this.shop);
         }).catch((err)=>{
           console.log(err);
         })

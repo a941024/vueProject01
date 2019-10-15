@@ -20,8 +20,8 @@
 
 <style scoped>
   #address {
-    height: 100%;
-    width: 100%;
+    width: 18.75rem;
+    height: 33rem;
   }
 
   .van-nav-bar {

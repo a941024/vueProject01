@@ -11,7 +11,7 @@
         return;
       }
       //f/320=80/375
-      html.style.fontSize =15.99
+      html.style.fontSize =20
 
         * (clientW / 375) + "px";
     }

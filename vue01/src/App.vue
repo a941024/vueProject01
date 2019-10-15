@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
-    <MyFoot></MyFoot>
+    <!--<MyFoot></MyFoot>-->
   </div>
 </template>
 
 <script>
 
-import MyFoot from "./components/MyFoot";
+// import MyFoot from "./components/MyFoot";
 export default {
   name: 'App',
-  components: {MyFoot}
+  // components: {MyFoot}
 }
 </script>
 

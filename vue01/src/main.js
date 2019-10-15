@@ -6,9 +6,14 @@ import router from './router'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import '../src/peishi/PeiShi_w'
+import myHttp from "./axios/http"
+axios.defaults.withCredentials = true;
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+//将自定义的网络请求对象赋值给Vue构造函数的原型对象，这样当前项目的任意地方至于获取到Vue实例，就可发起自定义网络请求
+Vue.prototype.myHttp = myHttp;
 
 Vue.use(VueAxios, axios)
 Vue.use(Vant);

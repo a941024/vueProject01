@@ -4,36 +4,39 @@
       <router-link :to="{path:'/home'}">
         <span id="head_01" style="color: white">ele.me</span>
       </router-link>
-      <router-link :to="{path:'/logIn'}">
-        <i id="head_02" style="color: white;font-size: 1.2rem" class="iconfont icon-wode"></i>
-      </router-link>
-    </div>
 
+        <div @click="login" class="head_right">
+          <i id="head_02" style="color: white;font-size: 1.2rem" class="iconfont icon-wode head_i" v-if="!isShow"></i>
+          <span class="txt1" v-if="isShow">登录\注册</span>
+        </div>
+
+    </div>
+    <nav>{{getcity}}</nav>
     <div id="guess" class="mgin">
       <div class="van1">
         <span id="span1">当前定位城市</span>
         <span id="span2">定位不准时,请在商品列表中选择</span>
       </div>
-      <van-cell title=" " is-link/>
+      <router-link :to="{path:'/findCity',query:{name:'郑州',id:32}}">
+        <van-cell title="郑州" is-link  />
+      </router-link>
     </div>
 
     <div class="mgin">
       <van-cell value="热门城市" />
       <van-row>
         <van-col span="6" class="van2"  v-for="(a,b) in hotCity" :key="b">
-          <router-link :to="{path:'/findCity'}" style="line-height: 2rem;color: #3190e8; font-size: 0.7rem">
+          <router-link :to="{path:'/findCity',query:{name:a.name,id:a.id}}" style="line-height: 2rem;color: #3190e8; font-size: 0.7rem">
             {{a.name}}
           </router-link>
         </van-col>
       </van-row>
     </div>
-
-
       <div class="mgin"  v-for="(v,i) in cityS" :key="i">
-        <h2 class="h_1">{{v}}</h2>
+        <h6 class="h_1">{{v}}</h6>
         <van-row>
           <van-col span="6" class="van2 van-ellipsis" v-for="(x,y) in ziMu[v]" :to="{path:'/findCity',query:x}" :key="y">
-            <router-link :to="{path:'/findCity'}" style="line-height: 2rem;color: rgba(0,0,0,0.7);font-size: 0.6rem">
+            <router-link :to="{path:'/findCity',query: {name:x.name,id:x.id}}" style="line-height: 2rem;color: rgba(0,0,0,0.7);font-size: 0.6rem">
               {{x.name}}
             </router-link>
           </van-col>
@@ -50,14 +53,22 @@
       return {
         hotCity:[],
         cityS:[],
-        ziMu:[]
+        ziMu:[],
+        id:"",
+        cityN:"",
+        yhm:"",
+        isShow:true
       }
     },
     created(){
-      //    发起网络请求
+      // if(this.yhm){
+      //   this.isShow=false;
+      // }else{
+      //   this.isShow=true
+      // }
       this.axios.get("https://elm.cangdu.org/v1/cities?type=hot").then((response) => {
         this.hotCity=response.data;
-        console.log(this.hotCity);
+        // console.log(this.hotCity);
       });
       this.axios.get("https://elm.cangdu.org/v1/cities?type=group").then((response) => {
         let cityS = [];
@@ -68,13 +79,40 @@
         cityS.sort();
         this.cityS = cityS;
       });
+    },
+    methods:{
+      sendAll(j){
+        this.id =j.id;
+        this.cityN = j.name
+      },
+      login(){
+        if(this.yhm){
+          this.$router.push({path:'/profile',query:{yhm:this.yhm}});
+          // this.$set(this.isShow,0,false)
+        }else{
+          this.$router.push({path:'/logIn'});
+          // this.$set(this.isShow,1,true)
+
+        }
+      },
+    },
+    computed:{
+      getcity(){
+        return this.yhm = this.$route.query.yhm;
+        // return this.isShow = this.$route.query.show;
+      },
+    },
+    watch:{
+      yhm(){
+        if(!this.yhm==""){
+          this.isShow=false;
+        }
+      }
     }
   }
 </script>
 
 <style scoped>
-  /*@import 'http://at.alicdn.com/t/font_1368034_uj0sh6yt57p.css';*/
-  /*@import 'http://at.alicdn.com/t/font_1368034_uj0sh6yt57p.js';*/
 
   .van1{
     border-bottom: 1px solid rgba(0,0,0,0.3);
@@ -109,7 +147,9 @@
     padding-right: 1rem;
     padding-top: 0.45rem;
   }
-
+nav{
+  display: none;
+}
   #span1{
     font-size: 0.8rem;
     color: rgba(0,0,0,0.8);
@@ -127,7 +167,24 @@
   .h_1{
     background: white;
     padding-left: 0.7rem;
+    color: rgba(0,0,0,0.7);
+    padding: 0.4rem;
   }
+  .head_right{
+    width: 4rem;
+    text-align: right;
+    font-size: 0.8rem;
+    position:absolute;
+    right: 0.4rem;
+    top: 0.5rem;
+  }
+  .head_i{
+    position: absolute;
+    top:-0.5rem;
+    right:-0.5rem;
+  }
+
+
   @font-face {font-family: "iconfont";
     src: url('//at.alicdn.com/t/font_1368034_uj0sh6yt57p.eot?t=1570786407437'); /* IE9 */
     src: url('//at.alicdn.com/t/font_1368034_uj0sh6yt57p.eot?t=1570786407437#iefix') format('embedded-opentype'), /* IE6-IE8 */
